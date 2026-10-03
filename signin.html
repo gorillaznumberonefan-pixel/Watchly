@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Watchly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Watchly</h1>
+    </header>
+
+    <main class="account-page">
+
+        <div class="account-box">
+
+            <h2>Sign In</h2>
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="@username"
+                autocomplete="username"
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                autocomplete="current-password"
+            >
+
+            <button onclick="signIn()">Sign In</button>
+
+            <p id="signin-message"></p>
+
+            <p class="account-link">
+                Don't have an account?
+                <a href="account.html">Create one</a>
+            </p>
+
+            <p class="account-link">
+                <a href="index.html">← Back to Watchly</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <script>
+        function signIn() {
+            const username =
+                document.getElementById("username").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const message =
+                document.getElementById("signin-message");
+
+            if (!username || !password) {
+                message.textContent = "Please enter your username and password.";
+                return;
+            }
+
+            const savedAccount =
+                localStorage.getItem("watchlyAccount");
+
+            if (!savedAccount) {
+                message.textContent =
+                    "No Watchly account has been created on this device yet.";
+                return;
+            }
+
+            const account = JSON.parse(savedAccount);
+
+            if (username !== account.username) {
+                message.textContent = "Username not found.";
+                return;
+            }
+
+            /*
+                The current prototype does not securely store passwords,
+                so we cannot actually verify the password yet.
+            */
+
+            message.textContent = "Signed in! Welcome back, " +
+                account.displayName + "!";
+
+            localStorage.setItem("watchlySignedIn", "true");
+
+            setTimeout(function() {
+                window.location.href = "index.html";
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
