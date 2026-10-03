@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile - Watchly</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+
+    <header>
+        <h1>Watchly</h1>
+
+        <a href="index.html">
+            <button>← Back to Watchly</button>
+        </a>
+    </header>
+
+    <main class="account-page">
+
+        <div class="account-box">
+
+            <h2 id="profile-display-name">Loading...</h2>
+
+            <p id="profile-username"></p>
+
+            <p>This is your Watchly profile.</p>
+
+        </div>
+
+    </main>
+
+    <script>
+        function loadProfile() {
+            const savedAccount =
+                localStorage.getItem("watchlyAccount");
+
+            if (!savedAccount) {
+                document.getElementById("profile-display-name").textContent =
+                    "Account not found.";
+
+                document.getElementById("profile-username").textContent =
+                    "No Watchly account is saved on this device.";
+
+                return;
+            }
+
+            const account = JSON.parse(savedAccount);
+
+            document.getElementById("profile-display-name").textContent =
+                account.displayName;
+
+            document.getElementById("profile-username").textContent =
+                account.username;
+        }
+
+        loadProfile();
+    </script>
+
+</body>
+</html>
