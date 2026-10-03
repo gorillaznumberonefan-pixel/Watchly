@@ -24,6 +24,7 @@
                 type="text"
                 id="display-name"
                 placeholder="Your display name"
+                autocomplete="name"
             >
 
             <label for="username">Username</label>
@@ -31,6 +32,7 @@
                 type="text"
                 id="username"
                 placeholder="@username"
+                autocomplete="username"
             >
 
             <label for="password">Password</label>
@@ -38,6 +40,7 @@
                 type="password"
                 id="password"
                 placeholder="Password"
+                autocomplete="new-password"
             >
 
             <label for="confirm-password">Confirm Password</label>
@@ -45,6 +48,7 @@
                 type="password"
                 id="confirm-password"
                 placeholder="Confirm password"
+                autocomplete="new-password"
             >
 
             <button onclick="createAccount()">Create Account</button>
@@ -81,22 +85,61 @@
             const message =
                 document.getElementById("account-message");
 
+            // Make sure every field is filled out
             if (!displayName || !username || !password || !confirmPassword) {
                 message.textContent = "Please fill out every field.";
                 return;
             }
 
+            // Make sure the username starts with @
             if (!username.startsWith("@")) {
                 message.textContent = "Your username must start with @.";
                 return;
             }
 
+            // Make sure the username has something after @
+            if (username.length < 2) {
+                message.textContent = "Please enter a username after @.";
+                return;
+            }
+
+            // Make sure the passwords match
             if (password !== confirmPassword) {
                 message.textContent = "Passwords do not match.";
                 return;
             }
 
-            message.textContent = "Account creation will be added soon!";
+            // Make sure the password isn't extremely short
+            if (password.length < 6) {
+                message.textContent = "Your password must be at least 6 characters.";
+                return;
+            }
+
+            /*
+                Temporary account storage.
+
+                This lets us test the account system before
+                Watchly has a real backend.
+
+                DO NOT use this for real passwords.
+            */
+            const account = {
+                displayName: displayName,
+                username: username
+            };
+
+            localStorage.setItem(
+                "watchlyAccount",
+                JSON.stringify(account)
+            );
+
+            // Tell the user the account was created
+            message.textContent = "Account created! Welcome to Watchly!";
+
+            // Give the message a moment to appear
+            setTimeout(function() {
+                window.location.href = "index.html";
+            }, 1000);
         }
     </script>
 
