@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Watchly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+    <header>
+        <h1>Watchly</h1>
+    </header>
+
+    <main class="account-page">
+
+        <div class="account-box">
+
+            <h2>Create Account</h2>
+
+            <label for="display-name">Display Name</label>
+            <input
+                type="text"
+                id="display-name"
+                placeholder="Your display name"
+            >
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="@username"
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+            >
+
+            <label for="confirm-password">Confirm Password</label>
+            <input
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm password"
+            >
+
+            <button onclick="createAccount()">Create Account</button>
+
+            <p id="account-message"></p>
+
+            <p class="account-link">
+                Already have an account?
+                <a href="#">Sign in</a>
+            </p>
+
+            <p class="account-link">
+                <a href="index.html">← Back to Watchly</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <script>
+        function createAccount() {
+            const displayName =
+                document.getElementById("display-name").value.trim();
+
+            const username =
+                document.getElementById("username").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const confirmPassword =
+                document.getElementById("confirm-password").value;
+
+            const message =
+                document.getElementById("account-message");
+
+            if (!displayName || !username || !password || !confirmPassword) {
+                message.textContent = "Please fill out every field.";
+                return;
+            }
+
+            if (!username.startsWith("@")) {
+                message.textContent = "Your username must start with @.";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                message.textContent = "Passwords do not match.";
+                return;
+            }
+
+            message.textContent = "Account creation will be added soon!";
+        }
+    </script>
+
+</body>
+</html>
