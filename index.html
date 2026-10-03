@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Watchly</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
@@ -58,6 +63,21 @@
     </main>
 
     <script src="script.js"></script>
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js")
+                .then(() => {
+                    console.log("Watchly service worker registered.");
+                })
+                .catch(error => {
+                    console.error(
+                        "Service worker registration failed:",
+                        error
+                    );
+                });
+        }
+    </script>
 
 </body>
 </html>
