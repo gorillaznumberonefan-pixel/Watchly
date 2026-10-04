@@ -1,4 +1,4 @@
-const CACHE_NAME = "watchly-v1";
+const CACHE_NAME = "watchly-v2";
 
 const FILES_TO_CACHE = [
     "index.html",
@@ -6,7 +6,8 @@ const FILES_TO_CACHE = [
     "signin.html",
     "style.css",
     "script.js",
-    "manifest.json"
+    "manifest.json",
+    "watchly-icon-512.png"
 ];
 
 self.addEventListener("install", event => {
